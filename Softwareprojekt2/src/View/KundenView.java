@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -19,14 +21,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 
+import Model.Customer;
+import Model.CustomerModel;
+import Model.CustomerTableModel;
+
 import java.awt.Color;
 
 public class KundenView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable KuTable;
-
-	
+	private List<Customer> customerList;
+	private CustomerTableModel ctm;
 
 	/**
 	 * Launch the application.
@@ -80,24 +86,48 @@ public class KundenView extends JFrame {
 		JButton btnDelKu = new JButton("L\u00F6schen");
 		panel_1.add(btnDelKu);
 		
+		btnDelKu.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				
+				   
+			   }
+			});
+		
+		
+		
 		JButton btnChangeKu = new JButton("\u00C4ndern");
 		panel_1.add(btnChangeKu);
+		
+		JButton btnreload = new JButton("Aktualisieren");
+		panel_1.add(btnreload);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		
+	
 		
+		ctm = new CustomerTableModel(CustomerModel.getAllCustomer());
 		
-		
-		
-		KuTable = new JTable();
+		KuTable = new JTable(ctm);
 	
 		KuTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setViewportView(KuTable);
 		
+		btnreload.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				  KuTable.setModel(new CustomerTableModel(CustomerModel.getAllCustomer()));
+			   }
+			});
+		
 		
 		
 	}
+	
+	
 
 }

@@ -12,8 +12,8 @@ public class CustomerModel {
 
 	private static ArrayList<Customer> customerList = new ArrayList<Customer>();
 
-	public List<Customer> getAllCustomer() throws DatabaseException {
-		Query q = DBConnector.getEM().createQuery("select * from TBL_CUSTOMER ");
+	public static List<Customer> getAllCustomer() throws DatabaseException {
+		Query q = DBConnector.getEM().createQuery("select t from TBL_CUSTOMER t");
 		return q.getResultList();
 	}
 

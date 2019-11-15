@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class AddKuView extends JFrame {
 
@@ -29,7 +30,7 @@ public class AddKuView extends JFrame {
 	private JTextField tfKuAnschrift;
 	private JTextField tfKuVorname;
 	private JTextField tfKuTelefon;
-	 
+	
 
 	/**
 	 * Launch the application.
@@ -71,6 +72,7 @@ public class AddKuView extends JFrame {
 				
 				Customer newcust = new Customer(name, vorname, firma, plz, ort, anschrift, telefon);
 				CustomerModel.addCustomer(newcust);
+				
 				
 			dispose();
 		

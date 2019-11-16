@@ -29,7 +29,7 @@ public class CustomerModel {
 		em.getTransaction().commit();
 	}
 
-	public void deleteCustomer(Customer entry) throws DatabaseException {
+	public static void deleteCustomer(Customer entry) throws DatabaseException {
 		EntityManager em = DBConnector.getEM();
 		em.getTransaction().begin();
 		em.remove(entry);

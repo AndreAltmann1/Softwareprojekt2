@@ -11,15 +11,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+
+import Model.Customer;
+import Model.CustomerModel;
+import Model.CustomerTableModel;
+import Model.ProjectModel;
+import Model.ProjectTableModel;
+import Model.Projekt;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class ProjektView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable prjTable;
-
+	private List<Projekt> projectList;
+	private ProjectTableModel ptm;
+	private Projekt prj;
+	private int row;
 	/**
 	 * Launch the application.
 	 */
@@ -65,15 +77,27 @@ public class ProjektView extends JFrame {
 		});
 		panel_1.add(btnChangePrj);
 		
+		JButton btnReload = new JButton("Reload Table");
+		panel_1.add(btnReload);
+		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		prjTable = new JTable();
+		ptm = new ProjectTableModel(ProjectModel.getAllProjects());
+		prjTable = new JTable(ptm);
 		prjTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setViewportView(prjTable);
+		
+		btnReload.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				  prjTable.setModel(new ProjectTableModel(ProjectModel.getAllProjects()));
+			   }
+			});
 		
 		pack();
 		setVisible(true);

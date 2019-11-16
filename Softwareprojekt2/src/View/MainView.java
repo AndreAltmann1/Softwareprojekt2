@@ -50,6 +50,8 @@ public class MainView extends JFrame {
 	 * Create the frame.
 	 */
 	public MainView() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 451);
 		

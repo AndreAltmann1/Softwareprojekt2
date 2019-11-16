@@ -33,7 +33,8 @@ public class KundenView extends JFrame {
 	private JTable KuTable;
 	private List<Customer> customerList;
 	private CustomerTableModel ctm;
-
+	private Customer cust;
+	private int row;
 	/**
 	 * Launch the application.
 	 */
@@ -90,7 +91,10 @@ public class KundenView extends JFrame {
 		{
 			   public void actionPerformed(ActionEvent e)
 			   {
-				
+				row = KuTable.getSelectedRow();
+				customerList = CustomerModel.getAllCustomer();
+				cust = customerList.get(KuTable.convertRowIndexToModel(row));
+				CustomerModel.deleteCustomer(cust);
 				   
 			   }
 			});

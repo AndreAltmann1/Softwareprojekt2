@@ -26,11 +26,10 @@ public class CustomerTableModel extends AbstractTableModel{
 		      case 0: return cust.getName();
 		      case 1: return cust.getVorname();
 		      case 2: return cust.getFirma();
-		      case 3: return cust.getFirma();
-		      case 4: return cust.getPlz();
-		      case 5: return cust.getOrt();
-		      case 6: return cust.getAnschrift();
-		      case 7: return cust.getTelefon();
+		      case 3: return cust.getPlz();
+		      case 4: return cust.getOrt();
+		      case 5: return cust.getAnschrift();
+		      case 6: return cust.getTelefon();
 		      default: return null;
 		    }
 		  }

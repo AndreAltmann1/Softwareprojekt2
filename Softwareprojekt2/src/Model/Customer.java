@@ -3,6 +3,8 @@ package Model;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +15,7 @@ import javax.persistence.*;
 
 public class Customer implements Serializable {
 
+	
 	@Column(name="Name", nullable = false)
 	private String name;
 	@Column(name="Vorname", nullable = false)
@@ -32,6 +35,8 @@ public class Customer implements Serializable {
 	@GeneratedValue
 	private Long kuNr;
 	private static final long serialVersionUID = 1L;
+	
+	    
 
 	
 	public Customer(String name, String vorname, String firma, String plz, String ort, String anschrift, String telefon) {
@@ -107,7 +112,7 @@ public class Customer implements Serializable {
 	
 	@Override
 	public String toString() {
-		return name + " " + vorname + " " + firma + " " + plz + " " + ort +" " + anschrift + " " + telefon;
+		return name + " " + vorname + " - " + firma;
 	}
    
 }

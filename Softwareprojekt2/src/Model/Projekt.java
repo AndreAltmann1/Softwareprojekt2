@@ -9,27 +9,35 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Projekt
  *
  */
-@Entity
-@Table(name="tbl_Projekt")
+@Entity(name="TBL_PROJECT")
+
 
 public class Projekt implements Serializable {
 
 	@Column(name="Name", nullable = false)
 	private String name;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="Kunde", nullable = false)
 	private Customer customer;
 	
 	
-	@Column(name="isPrivate", nullable = false)
-	private Boolean isPrivate;
+	@Column(name="Zweck", nullable = false)
+	private String zweck;
 	
 	@Id
 	@Column(name="Projektnummer")
 	@GeneratedValue
 	private Long prjNr;
 	private static final long serialVersionUID = 1L;
-
+	
+	
+	public Projekt(String name, Customer customer, String zweck) {
+		super();
+		this.name=name;
+		this.customer=customer;
+		this.zweck=zweck;
+	}
+		
 	public Projekt() {
 		super();
 	}   
@@ -47,12 +55,12 @@ public class Projekt implements Serializable {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}   
-	public Boolean getIsPrivate() {
-		return this.isPrivate;
+	public String getZweck() {
+		return this.zweck;
 	}
 
-	public void setIsPrivate(Boolean isPrivate) {
-		this.isPrivate = isPrivate;
+	public void setZweck(String zweck) {
+		this.zweck = zweck;
 	}
 	
 	public Long getPrjNr() {

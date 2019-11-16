@@ -6,20 +6,35 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.Customer;
+import Model.CustomerModel;
+import Model.CustomerTableModel;
+import Model.ProjectModel;
+import Model.Projekt;
+
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
 public class AddProjektView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-
+	private JTextField tfName;
+	private JComboBox<Customer> cbCustomer;
+	private JComboBox<String> cbZweck;
+	private String[] cbFill;
+	private List<Customer> customerList;
 	/**
 	 * Launch the application.
 	 */
@@ -53,6 +68,21 @@ public class AddProjektView extends JFrame {
 		JButton btnAddProjekt = new JButton("Hinzuf\u00FCgen");
 		panel.add(btnAddProjekt);
 		
+		btnAddProjekt.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				  String name = tfName.getText();
+				  Customer customer = (Customer) cbCustomer.getSelectedItem();
+				  String zweck = cbZweck.getSelectedItem().toString();
+				  
+				  Projekt projekt = new Projekt(name, customer, zweck);
+				  ProjectModel.addProject(projekt);
+				  
+				  
+			   }
+			});
+		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -70,14 +100,14 @@ public class AddProjektView extends JFrame {
 		gbc_lblPrjName.gridy = 1;
 		panel_1.add(lblPrjName, gbc_lblPrjName);
 		
-		textField = new JTextField();
+		tfName = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 2;
 		gbc_textField.gridy = 1;
-		panel_1.add(textField, gbc_textField);
-		textField.setColumns(10);
+		panel_1.add(tfName, gbc_textField);
+		tfName.setColumns(10);
 		
 		JLabel lblPrjKunde = new JLabel("Kunde:");
 		GridBagConstraints gbc_lblPrjKunde = new GridBagConstraints();
@@ -87,13 +117,21 @@ public class AddProjektView extends JFrame {
 		gbc_lblPrjKunde.gridy = 2;
 		panel_1.add(lblPrjKunde, gbc_lblPrjKunde);
 		
-		JComboBox comboBox = new JComboBox();
+		
+		
+		
+		cbCustomer = new JComboBox<Customer>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 2;
 		gbc_comboBox.gridy = 2;
-		panel_1.add(comboBox, gbc_comboBox);
+		panel_1.add(cbCustomer, gbc_comboBox);
+		
+		customerList = new ArrayList<Customer>(CustomerModel.getAllCustomer());
+		for (Customer cust : customerList) {
+		    cbCustomer.addItem(cust);
+		}
 		
 		JLabel lblPrjZweck = new JLabel("Zweck:");
 		GridBagConstraints gbc_lblPrjZweck = new GridBagConstraints();
@@ -103,7 +141,8 @@ public class AddProjektView extends JFrame {
 		gbc_lblPrjZweck.gridy = 3;
 		panel_1.add(lblPrjZweck, gbc_lblPrjZweck);
 		
-		JComboBox<String> cbZweck = new JComboBox<>(new String[] {"Privat", "Arbeit"});
+		cbFill = new String[] {"Privat", "Arbeit"};
+		cbZweck = new JComboBox<>(cbFill);
 		GridBagConstraints gbc_cbZweck = new GridBagConstraints();
 		gbc_cbZweck.anchor = GridBagConstraints.NORTH;
 		gbc_cbZweck.fill = GridBagConstraints.HORIZONTAL;

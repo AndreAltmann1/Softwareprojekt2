@@ -70,5 +70,10 @@ public class Projekt implements Serializable {
 	public void setPrjNr(Long prjNr) {
 		this.prjNr = prjNr;
 	}
+	
+	@Override
+	public String toString() {
+		return name ;
+	}
    
 }

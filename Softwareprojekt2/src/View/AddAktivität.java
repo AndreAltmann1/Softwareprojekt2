@@ -6,12 +6,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.Activity;
+import Model.ActivityModel;
+import Model.Customer;
+import Model.CustomerModel;
+import Model.ProjectModel;
+import Model.Projekt;
+
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.swing.JComboBox;
 
 public class AddAktivität extends JFrame {
@@ -20,7 +35,8 @@ public class AddAktivität extends JFrame {
 	private JTextField tfAktName;
 	private JTextField tfAktDatum;
 	private JTextField tfAktDauer;
-
+	private JComboBox<Projekt> cbAktPrj;
+	private List<Projekt> projectList;
 	/**
 	 * Launch the application.
 	 */
@@ -54,6 +70,22 @@ public class AddAktivität extends JFrame {
 		JButton btnAddAktivität = new JButton("Hinzuf\u00FCgen");
 		panel.add(btnAddAktivität);
 		
+		btnAddAktivität.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				  String name = tfAktName.getText();
+				  Projekt projekt = (Projekt) cbAktPrj.getSelectedItem();
+				  Date date = new Date();
+				  
+				  
+				  Activity activity = new Activity(name, projekt, date);
+				  ActivityModel.addActivity(activity);
+				  dispose();
+				  
+			   }
+			});
+		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -86,13 +118,18 @@ public class AddAktivität extends JFrame {
 		gbc_lblAktProjekt.gridy = 2;
 		panel_1.add(lblAktProjekt, gbc_lblAktProjekt);
 		
-		JComboBox cbAktPrj = new JComboBox();
+		cbAktPrj = new JComboBox<Projekt>();
 		GridBagConstraints gbc_cbAktPrj = new GridBagConstraints();
 		gbc_cbAktPrj.insets = new Insets(0, 0, 5, 0);
 		gbc_cbAktPrj.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbAktPrj.gridx = 2;
 		gbc_cbAktPrj.gridy = 2;
 		panel_1.add(cbAktPrj, gbc_cbAktPrj);
+		
+		projectList = new ArrayList<Projekt>(ProjectModel.getAllProjects());
+		for (Projekt prj : projectList) {
+		    cbAktPrj.addItem(prj);
+		}
 		
 		JLabel lblAktDatum = new JLabel("Datum:");
 		GridBagConstraints gbc_lblAktDatum = new GridBagConstraints();

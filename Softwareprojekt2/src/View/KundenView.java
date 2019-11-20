@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import javax.swing.table.TableModel;
 import Model.Customer;
 import Model.CustomerModel;
 import Model.CustomerTableModel;
+
 
 import java.awt.Color;
 
@@ -116,7 +119,7 @@ public class KundenView extends JFrame {
 		ctm = new CustomerTableModel(CustomerModel.getAllCustomer());
 		
 		KuTable = new JTable(ctm);
-	
+		
 		KuTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setViewportView(KuTable);
 		
@@ -127,8 +130,12 @@ public class KundenView extends JFrame {
 				  KuTable.setModel(new CustomerTableModel(CustomerModel.getAllCustomer()));
 			   }
 			});
-		
-		
+
+		addWindowFocusListener(new WindowAdapter() {
+			public void windowGainedFocus(WindowEvent e) {
+				KuTable.setModel(new CustomerTableModel(CustomerModel.getAllCustomer()));
+			}
+		});
 		
 	}
 	

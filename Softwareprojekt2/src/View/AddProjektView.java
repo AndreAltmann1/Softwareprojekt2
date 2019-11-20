@@ -35,6 +35,7 @@ public class AddProjektView extends JFrame {
 	private JComboBox<String> cbZweck;
 	private String[] cbFill;
 	private List<Customer> customerList;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -78,7 +79,7 @@ public class AddProjektView extends JFrame {
 				  
 				  Projekt projekt = new Projekt(name, customer, zweck);
 				  ProjectModel.addProject(projekt);
-				  
+				  dispose();
 				  
 			   }
 			});

@@ -4,6 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,11 +17,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
+import Model.Activity;
+import Model.ActivityModel;
+import Model.ActivityTableModel;
 import Model.DBConnector;
 
+import Model.ProjectModel;
+import Model.ProjectTableModel;
+
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -27,7 +42,10 @@ public class MainView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	private ActivityTableModel atm;
+	private List<Activity> activityList;
+	private Activity act;
+	private int row;
 	/**
 	 * Launch the application.
 	 */
@@ -115,6 +133,21 @@ public class MainView extends JFrame {
 		JButton btnLöschen = new JButton("L\u00F6schen");
 		panel.add(btnLöschen);
 		
+		btnLöschen.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				row = table.getSelectedRow();
+				activityList = ActivityModel.getAllActivities();
+				act = activityList.get(table.convertRowIndexToModel(row));
+				ActivityModel.deleteActivity(act);
+				table.setModel(new ActivityTableModel(ActivityModel.getAllActivities()));
+			   }
+			});
+		
+		JButton btnReload = new JButton("Reload Table");
+		panel.add(btnReload);
+		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
 		
@@ -125,10 +158,30 @@ public class MainView extends JFrame {
 		 
 		    
 		    
+		atm = new ActivityTableModel(ActivityModel.getAllActivities());
+		table = new JTable(atm);
 		
-		table = new JTable();
+		
+		
+		
+		
+		
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setViewportView(table);
+		
+		btnReload.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				  table.setModel(new ActivityTableModel(ActivityModel.getAllActivities()));
+			   }
+			});
+		
+		addWindowFocusListener(new WindowAdapter() {
+			public void windowGainedFocus(WindowEvent e) {
+				table.setModel(new ActivityTableModel(ActivityModel.getAllActivities()));
+			}
+		});
 		
 		pack();
 		setVisible(true);

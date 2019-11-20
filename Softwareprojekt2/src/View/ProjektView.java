@@ -21,6 +21,8 @@ import Model.Projekt;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -70,6 +72,18 @@ public class ProjektView extends JFrame {
 		JButton btnDelPrj = new JButton("L\u00F6schen");
 		panel_1.add(btnDelPrj);
 		
+		btnDelPrj.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				row = prjTable.getSelectedRow();
+				projectList = ProjectModel.getAllProjects();
+				prj = projectList.get(prjTable.convertRowIndexToModel(row));
+				ProjectModel.deleteProject(prj);
+				   
+			   }
+			});
+		
 		JButton btnChangePrj = new JButton("\u00C4ndern");
 		btnChangePrj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -98,6 +112,14 @@ public class ProjektView extends JFrame {
 				  prjTable.setModel(new ProjectTableModel(ProjectModel.getAllProjects()));
 			   }
 			});
+
+		addWindowFocusListener(new WindowAdapter() {
+			public void windowGainedFocus(WindowEvent e) {
+				prjTable.setModel(new ProjectTableModel(ProjectModel.getAllProjects()));
+			}
+		});
+		
+	
 		
 		pack();
 		setVisible(true);

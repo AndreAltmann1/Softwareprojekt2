@@ -98,6 +98,8 @@ public class KundenView extends JFrame {
 				customerList = CustomerModel.getAllCustomer();
 				cust = customerList.get(KuTable.convertRowIndexToModel(row));
 				CustomerModel.deleteCustomer(cust);
+				KuTable.setModel(new CustomerTableModel(CustomerModel.getAllCustomer()));
+				
 				   
 			   }
 			});
@@ -106,6 +108,15 @@ public class KundenView extends JFrame {
 		
 		JButton btnChangeKu = new JButton("\u00C4ndern");
 		panel_1.add(btnChangeKu);
+		
+		btnChangeKu.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+			ChangeCustView changeKu = new ChangeCustView(KuTable);
+			changeKu.setVisible(true);
+			   }
+			});
 		
 		JButton btnreload = new JButton("Aktualisieren");
 		panel_1.add(btnreload);

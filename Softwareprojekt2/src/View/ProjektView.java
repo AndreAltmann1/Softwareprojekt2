@@ -80,6 +80,7 @@ public class ProjektView extends JFrame {
 				projectList = ProjectModel.getAllProjects();
 				prj = projectList.get(prjTable.convertRowIndexToModel(row));
 				ProjectModel.deleteProject(prj);
+				prjTable.setModel(new ProjectTableModel(ProjectModel.getAllProjects()));
 				   
 			   }
 			});
@@ -87,6 +88,10 @@ public class ProjektView extends JFrame {
 		JButton btnChangePrj = new JButton("\u00C4ndern");
 		btnChangePrj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ChangeProjectView changePrj = new ChangeProjectView(prjTable);
+				changePrj.setVisible(true);
+				
+				
 			}
 		});
 		panel_1.add(btnChangePrj);

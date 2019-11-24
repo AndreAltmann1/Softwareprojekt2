@@ -21,7 +21,8 @@ public class CustomerTableModel extends AbstractTableModel{
 		
 
 		  public Object getValueAt(int row, int col) {
-		    Customer cust = customerList.get(row);
+		 
+			  Customer cust = customerList.get(row);
 		    switch(col) {
 		      case 0: return cust.getName();
 		      case 1: return cust.getVorname();

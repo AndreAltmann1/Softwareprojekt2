@@ -12,7 +12,7 @@ public class ActivityTableModel extends AbstractTableModel{
 	public ActivityTableModel(List <Activity> activities){
 		   super();
 		   this.activityList = activities;
-		   columns = new String[]{"name","projekt","datum"};
+		   columns = new String[]{"name","projekt","datum", "zeit"};
 		}
 		
 
@@ -23,6 +23,7 @@ public class ActivityTableModel extends AbstractTableModel{
 		      case 0: return act.getName();
 		      case 1: return act.getProjekt();
 		      case 2: return act.getDate();
+		      case 3: return act.getZeit();
 		      
 		      default: return null;
 		    }

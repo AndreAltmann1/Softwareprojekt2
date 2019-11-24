@@ -33,11 +33,12 @@ public class ActivityModel {
 		em.getTransaction().commit();
 	}
 
-	public void changeActivity(Activity entry, String name, Projekt projekt) throws DatabaseException{
+	public static void changeActivity(Activity entry, String name, Projekt projekt, int zeit) throws DatabaseException{
 		EntityManager em = DBConnector.getEM();
 		em.getTransaction().begin();
 		entry.setName(name);
 		entry.setProjekt(projekt);
+		entry.setZeit(zeit);
 		
 		
 		em.getTransaction().commit();

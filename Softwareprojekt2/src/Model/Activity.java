@@ -19,20 +19,24 @@ public class Activity implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="Projekt", nullable=false)
 	private Projekt projekt;
+	
 	@Column(name="Datum", nullable=false) 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	 private Date date;
+	@Column(name="Zeit")
+	private int zeit;
 	@Id
 	@Column(name="Activitynummer")
 	@GeneratedValue
 	private Long aktNr;
 	private static final long serialVersionUID = 1L;
 	
-	public Activity(String name, Projekt projekt, Date date) {
+	public Activity(String name, Projekt projekt, Date date, int zeit) {
 		super();
 		this.name=name;
 		this.projekt=projekt;
 		this.date=date;
+		this.zeit=zeit;
 	}
 
 	public Activity() {
@@ -70,6 +74,14 @@ public class Activity implements Serializable {
 
 	public void setAktNr(Long aktNr) {
 		this.aktNr = aktNr;
+	}
+
+	public int getZeit() {
+		return zeit;
+	}
+
+	public void setZeit(int zeit) {
+		this.zeit = zeit;
 	}
    
 }

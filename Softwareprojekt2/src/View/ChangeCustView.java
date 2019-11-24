@@ -2,28 +2,27 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Model.Customer;
-import Model.CustomerModel;
-
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class AddKuView extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+import Model.Customer;
+import Model.CustomerModel;
+
+public class ChangeCustView extends JFrame {
+	
 	private JPanel contentPane;
 	private JTextField tfKuName;
 	private JTextField tfKuFirma;
@@ -32,20 +31,23 @@ public class AddKuView extends JFrame {
 	private JTextField tfKuAnschrift;
 	private JTextField tfKuVorname;
 	private JTextField tfKuTelefon;
-	
+	private Customer cust;
+	private List<Customer> customerList;
+	private int row;
 
-	/**
-	 * Launch the application.
-	 */
-	
-	
 
-	/**
-	 * Create the frame.
-	 */
-	public AddKuView() {
+
+	public ChangeCustView(JTable table) {
 		
+		String name = (String) table.getValueAt(table.getSelectedRow(), 0);
+		String vorname = (String) table.getValueAt(table.getSelectedRow(), 1);
+		String firma = (String) table.getValueAt(table.getSelectedRow(), 2);
+		String plz = (String) table.getValueAt(table.getSelectedRow(), 3);
+		String ort = (String) table.getValueAt(table.getSelectedRow(), 4);
+		String anschrift = (String) table.getValueAt(table.getSelectedRow(), 5);
+		String telefon = (String) table.getValueAt(table.getSelectedRow(), 6);
 		
+	
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 591, 454);
@@ -57,40 +59,10 @@ public class AddKuView extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnAddKunde = new JButton("Hinzuf\u00FCgen");
-		panel.add(btnAddKunde);
+		JButton btnChangeKunde = new JButton("Ändern");
+		panel.add(btnChangeKunde);
 		
-		btnAddKunde.addActionListener(new ActionListener()
-		{
-		   public void actionPerformed(ActionEvent e)
-		   {
-			   
-			   if(tfKuName.getText().equals("") || tfKuVorname.getText().equals("") || tfKuFirma.getText().equals("") || tfKuPlz.getText().equals("")
-					   || tfKuOrt.getText().equals("") || tfKuAnschrift.getText().equals("") || tfKuTelefon.getText().equals(""))
-			   {
-				   JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
-				   
-			   }else {
-				String name = tfKuName.getText();
-				String firma = tfKuFirma.getText();
-				String plz = tfKuPlz.getText();
-				String ort = tfKuOrt.getText();
-				String anschrift = tfKuAnschrift.getText();
-				String vorname = tfKuVorname.getText();
-				String telefon = tfKuTelefon.getText();
-				
-				Customer newcust = new Customer(name, vorname, firma, plz, ort, anschrift, telefon);
-				CustomerModel.addCustomer(newcust);
-				dispose();
-			   }
-				
-			
 		
-			  
-			  
-			  
-		   }
-		});
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -217,6 +189,40 @@ public class AddKuView extends JFrame {
 		gbc_tfKuTelefon.gridy = 7;
 		panel_1.add(tfKuTelefon, gbc_tfKuTelefon);
 		tfKuTelefon.setColumns(10);
+		
+		
+		tfKuName.setText(name);
+		tfKuVorname.setText(vorname);
+		tfKuFirma.setText(firma);
+		tfKuPlz.setText(plz);
+		tfKuOrt.setText(ort);
+		tfKuAnschrift.setText(anschrift);
+		tfKuTelefon.setText(telefon);
+		
+		btnChangeKunde.addActionListener(new ActionListener()
+		{
+		   public void actionPerformed(ActionEvent e)
+		   {
+			   if(tfKuName.getText().equals("") || tfKuVorname.getText().equals("") || tfKuFirma.getText().equals("") || tfKuPlz.getText().equals("")
+					   || tfKuOrt.getText().equals("") || tfKuAnschrift.getText().equals("") || tfKuTelefon.getText().equals(""))
+			   {
+				   JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
+				   
+			   }else {
+				   row = table.getSelectedRow();
+					customerList = CustomerModel.getAllCustomer();
+					cust = customerList.get(table.convertRowIndexToModel(row));
+					CustomerModel.changeCustomer(cust, tfKuName.getText(), tfKuVorname.getText(), tfKuFirma.getText(), tfKuPlz.getText(), tfKuOrt.getText(), tfKuAnschrift.getText(), tfKuTelefon.getText());
+				dispose();
+			   }
+			   
+			   
+			
+			  
+			  
+			  
+		   }
+		});
 	}
 
 }

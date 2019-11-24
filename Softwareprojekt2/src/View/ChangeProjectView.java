@@ -2,34 +2,30 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Model.Customer;
-import Model.CustomerModel;
-import Model.CustomerTableModel;
-import Model.ProjectModel;
-import Model.Projekt;
-
-import java.awt.GridBagLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextArea;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class AddProjektView extends JFrame {
+import Model.Customer;
+import Model.CustomerModel;
+import Model.ProjectModel;
+import Model.Projekt;
+
+public class ChangeProjectView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfName;
@@ -37,27 +33,23 @@ public class AddProjektView extends JFrame {
 	private JComboBox<String> cbZweck;
 	private String[] cbFill;
 	private List<Customer> customerList;
+	private Projekt prj;
+	private List<Projekt> projectList;
+	private int row;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddProjektView frame = new AddProjektView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public AddProjektView() {
+	
+	public ChangeProjectView(JTable table) {
+		
+		String name = (String) table.getValueAt(table.getSelectedRow(), 0);
+		Customer ku = (Customer) table.getValueAt(table.getSelectedRow(), 1);
+		String zweck = (String) table.getValueAt(table.getSelectedRow(), 2);
+		
+		
+		
+		
+		
+		
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -68,24 +60,16 @@ public class AddProjektView extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnAddProjekt = new JButton("Hinzuf\u00FCgen");
-		panel.add(btnAddProjekt);
+		JButton btnChangeProjekt = new JButton("Ändern");
+		panel.add(btnChangeProjekt);
 		
-		btnAddProjekt.addActionListener(new ActionListener()
+		btnChangeProjekt.addActionListener(new ActionListener()
 		{
 			   public void actionPerformed(ActionEvent e)
 			   {
-				   if(tfName.getText().equals("")) {
-					   JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
-				   }else{
-				  String name = tfName.getText();
-				  Customer customer = (Customer) cbCustomer.getSelectedItem();
-				  String zweck = cbZweck.getSelectedItem().toString();
-				  
-				  Projekt projekt = new Projekt(name, customer, zweck);
-				  ProjectModel.addProject(projekt);
+				
 				  dispose();
-				   }
+				  
 			   }
 			});
 		
@@ -155,6 +139,30 @@ public class AddProjektView extends JFrame {
 		gbc_cbZweck.gridx = 2;
 		gbc_cbZweck.gridy = 3;
 		panel_1.add(cbZweck, gbc_cbZweck);
+		
+		
+		tfName.setText(name);
+		cbCustomer.setSelectedItem(ku);
+		cbZweck.setSelectedItem(zweck);
+		
+		btnChangeProjekt.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				   if(tfName.getText().equals("")) {
+					   JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
+				   }else {
+					   row = table.getSelectedRow();
+						projectList = ProjectModel.getAllProjects();
+						prj = projectList.get(table.convertRowIndexToModel(row));
+						ProjectModel.changeProject(prj, tfName.getText(),  (Customer) cbCustomer.getSelectedItem(), cbZweck.getSelectedItem().toString());
+					  dispose();
+				   }
+				  
+				  
+			   }
+			});
 	}
+
 
 }

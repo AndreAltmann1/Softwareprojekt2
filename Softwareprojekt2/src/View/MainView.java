@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import Model.Activity;
 import Model.ActivityModel;
@@ -46,6 +47,7 @@ public class MainView extends JFrame {
 	private List<Activity> activityList;
 	private Activity act;
 	private int row;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -145,8 +147,8 @@ public class MainView extends JFrame {
 			   }
 			});
 		
-		JButton btnReload = new JButton("Reload Table");
-		panel.add(btnReload);
+		JButton btnÄndern = new JButton("Ändern");
+		panel.add(btnÄndern);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
@@ -166,14 +168,18 @@ public class MainView extends JFrame {
 		
 		
 		
+		
+		
+		
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setViewportView(table);
 		
-		btnReload.addActionListener(new ActionListener()
+		btnÄndern.addActionListener(new ActionListener()
 		{
 			   public void actionPerformed(ActionEvent e)
 			   {
-				  table.setModel(new ActivityTableModel(ActivityModel.getAllActivities()));
+				   ChangeActivityView changeAct = new ChangeActivityView(table);
+					changeAct.setVisible(true);
 			   }
 			});
 		

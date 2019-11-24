@@ -37,7 +37,7 @@ public class CustomerModel {
 		em.getTransaction().commit();
 	}
 
-	public void changeCustomer(Customer entry, String name, String vorname, String firma, String plz, String ort,
+	public static void changeCustomer(Customer entry, String name, String vorname, String firma, String plz, String ort,
 			String anschrift, String telefon) throws DatabaseException{
 		EntityManager em = DBConnector.getEM();
 		em.getTransaction().begin();

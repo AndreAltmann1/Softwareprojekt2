@@ -24,7 +24,7 @@ public class Customer implements Serializable {
 	private String firma;
 	@Column(name="Plz", nullable = false)
 	private String plz;
-	@Column(name="Ort")
+	@Column(name="Ort", nullable = false)
 	private String ort;
 	@Column(name="Anschrift", nullable = false)
 	private String anschrift;

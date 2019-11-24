@@ -34,7 +34,7 @@ public class ProjectModel {
 		em.getTransaction().commit();
 	}
 
-	public void changeProject(Projekt entry, String name, Customer customer, String zweck) throws DatabaseException{
+	public static void changeProject(Projekt entry, String name, Customer customer, String zweck) throws DatabaseException{
 		EntityManager em = DBConnector.getEM();
 		em.getTransaction().begin();
 		entry.setName(name);

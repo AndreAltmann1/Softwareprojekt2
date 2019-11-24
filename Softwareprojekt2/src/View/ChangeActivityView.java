@@ -2,9 +2,23 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.mysql.cj.util.StringUtils;
@@ -12,29 +26,10 @@ import com.mysql.cj.util.StringUtils;
 import Model.Activity;
 import Model.ActivityModel;
 import Model.Customer;
-import Model.CustomerModel;
 import Model.ProjectModel;
 import Model.Projekt;
 
-import java.awt.GridBagLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.swing.JComboBox;
-
-public class AddAktivität extends JFrame {
+public class ChangeActivityView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfAktName;
@@ -42,26 +37,19 @@ public class AddAktivität extends JFrame {
 	private JTextField tfAktDauer;
 	private JComboBox<Projekt> cbAktPrj;
 	private List<Projekt> projectList;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddAktivität frame = new AddAktivität();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public AddAktivität() {
+	private int row;
+	private Activity act;
+	private List<Activity> activityList;
+	
+	public ChangeActivityView(JTable table) {
+		
+		String name = (String) table.getValueAt(table.getSelectedRow(), 0);
+		Projekt project = (Projekt) table.getValueAt(table.getSelectedRow(), 1);
+		String zeit = table.getValueAt(table.getSelectedRow(), 3).toString();
+		
+		
+		
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -72,31 +60,10 @@ public class AddAktivität extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnAddAktivität = new JButton("Hinzuf\u00FCgen");
-		panel.add(btnAddAktivität);
+		JButton btnChangeAktivität = new JButton("Ändern");
+		panel.add(btnChangeAktivität);
 		
-		btnAddAktivität.addActionListener(new ActionListener()
-		{
-			   public void actionPerformed(ActionEvent e)
-			   {
-				  try {
-				   if(tfAktName.getText().equals("")) {
-					   JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
-				   }else {
-				  String name = tfAktName.getText();
-				  Projekt projekt = (Projekt) cbAktPrj.getSelectedItem();
-				  int zeit = Integer.parseInt(tfAktDauer.getText());
-				  Date date = new Date();
-				  
-				  Activity activity = new Activity(name, projekt, date, zeit);
-				  ActivityModel.addActivity(activity);
-				  dispose();
-				   }
-				  }catch(NumberFormatException e1) {
-					  JOptionPane.showMessageDialog(null, "Zeit bitte als Zahl angeben", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
-				  }
-			   }
-			});
+	
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -174,8 +141,33 @@ public class AddAktivität extends JFrame {
 		panel_1.add(tfAktDauer, gbc_tfAktDauer);
 		tfAktDauer.setColumns(10);
 		
-	
+		tfAktName.setText(name);
+		cbAktPrj.setSelectedItem(project);
+		tfAktDauer.setText(zeit);
+		
+		btnChangeAktivität.addActionListener(new ActionListener()
+		{
+			   public void actionPerformed(ActionEvent e)
+			   {
+				   try {
+				   if(tfAktName.getText().equals("") ) {
+					   JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
+				   }else {
+					   row = table.getSelectedRow();
+						activityList = ActivityModel.getAllActivities();
+						act = activityList.get(table.convertRowIndexToModel(row));
+						ActivityModel.changeActivity(act, tfAktName.getText(),  (Projekt) cbAktPrj.getSelectedItem(), Integer.parseInt(tfAktDauer.getText()));
+					  dispose();
+				   }
+				   }catch(NumberFormatException e1) {
+					   JOptionPane.showMessageDialog(null, "Zeit bitte als Zahl angeben", "Fehlermeldung", JOptionPane.ERROR_MESSAGE);
+				   }
+				
+			   }
+			});
+		
 		
 	}
+
 
 }

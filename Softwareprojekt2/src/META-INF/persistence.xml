@@ -9,9 +9,9 @@
         <class>Model.Activity</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/softwareprojekt?serverTimezone=UTC" />
-             <property name="javax.persistence.jdbc.user" value="Andre" />
-            <property name="javax.persistence.jdbc.password" value="IchBinCool123" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/softwareprojekt2?serverTimezone=Europe/Berlin" />
+             <property name="javax.persistence.jdbc.user" value="Andre2" />
+            <property name="javax.persistence.jdbc.password" value="Softwareprojekt2019" />
             
          <property name="eclipselink.ddl-generation" value="create-tables" />
         </properties>

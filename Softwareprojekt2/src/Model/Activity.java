@@ -2,46 +2,50 @@ package Model;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.*;
 
-/**
- * Entity implementation class for Entity: Activity
- *
+/* Erzeugt Datenbank Tabelle für Aktivitäten
+ * 
  */
-@Entity(name="TBL_ACTIVITY")
+
+@Entity(name = "TBL_ACTIVITY")
 
 public class Activity implements Serializable {
 
-	@Column(name="Name", nullable = false)
+	@Column(name = "Name", nullable = false)
 	private String name;
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="Projekt", nullable=false)
+	@JoinColumn(name = "prjNr", nullable = false)
 	private Projekt projekt;
-	
-	@Column(name="Datum", nullable=false) 
+
+	@Column(name = "Datum", nullable = false)
 	@Temporal(TemporalType.DATE)
-	 private Date date;
-	@Column(name="Zeit")
+	private Date date;
+	@Column(name = "Zeit")
 	private int zeit;
 	@Id
-	@Column(name="Activitynummer")
+	@Column(name = "Activitynummer")
 	@GeneratedValue
 	private Long aktNr;
 	private static final long serialVersionUID = 1L;
-	
+
 	public Activity(String name, Projekt projekt, Date date, int zeit) {
 		super();
-		this.name=name;
-		this.projekt=projekt;
-		this.date=date;
-		this.zeit=zeit;
+		this.name = name;
+		this.projekt = projekt;
+
+		this.date = date;
+		this.zeit = zeit;
 	}
 
 	public Activity() {
 		super();
-	}   
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -59,9 +63,13 @@ public class Activity implements Serializable {
 	}
 
 	public Date getDate() {
-		
-		
+
 		return date;
+	}
+
+	public String getStringDate() {
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		return format.format(date);
 	}
 
 	public void setDate(Date date) {
@@ -83,5 +91,10 @@ public class Activity implements Serializable {
 	public void setZeit(int zeit) {
 		this.zeit = zeit;
 	}
-   
+
+	@Override
+	public String toString() {
+		return name + " " + projekt + " " + date + " " + zeit;
+	}
+
 }

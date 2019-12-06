@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -15,5 +16,9 @@
 	<classpathentry kind="lib" path="C:/Users/analt/Desktop/WInfo/2. Semester/Datenbanken/Developer/sqldeveloper-18.1.0.095.1630-x64/sqldeveloper/jdbc/lib/ojdbc8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/analt/Desktop/Java/sqlite-jdbc-3.27.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.18.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-8.0.18.jar"/>
+	<classpathentry kind="lib" path="libs/jdatepicker-1.3.4.jar"/>
+	<classpathentry kind="lib" path="libs/JPlanner.jar"/>
+	<classpathentry kind="lib" path="libs/jfreechart-1.5.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

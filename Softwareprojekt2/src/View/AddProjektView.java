@@ -23,6 +23,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,7 +49,7 @@ public class AddProjektView extends JFrame {
 		Icon iconAdd = new ImageIcon("resources/icons8-hinzufügen-24.png");
 		
 		setTitle("Projekte hinzufügen");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,6 +65,7 @@ public class AddProjektView extends JFrame {
 
 		//Hinzufügen vom Projekten
 		btnAddProjekt.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tfName.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung",

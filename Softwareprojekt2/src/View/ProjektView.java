@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 
@@ -30,8 +31,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import java.text.SimpleDateFormat;
 
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -55,7 +54,7 @@ public class ProjektView extends JFrame {
 		Icon iconInfo = new ImageIcon("resources/icons8-diagramm-bericht-24.png");
 		
 		setTitle("Projekte");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 628, 425);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,6 +72,7 @@ public class ProjektView extends JFrame {
 
 		//Öffnen des Fensters zum hinzufügen von Projekten
 		btnAddPrj.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				;
 				AddProjektView addPrj = new AddProjektView();
@@ -86,6 +86,7 @@ public class ProjektView extends JFrame {
 		panel_1.add(btnDelPrj);
 
 		btnDelPrj.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				row = prjTable.getSelectedRow();
 				if (row == -1) {
@@ -120,6 +121,7 @@ public class ProjektView extends JFrame {
 		btnChangePrj.setIcon(iconChange);
 		btnChangePrj.setToolTipText("Bearbeiten");
 		btnChangePrj.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				row = prjTable.getSelectedRow();
@@ -154,6 +156,7 @@ public class ProjektView extends JFrame {
 
 		//Öffnen des Fensters um Informationen zum ausgewählten Projektes zu erhalten
 		btnReload.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				row = prjTable.getSelectedRow();
 
@@ -169,6 +172,7 @@ public class ProjektView extends JFrame {
 
 		//Aktualisieren der Tabelle wenn Fenster Fokus gewinnt
 		addWindowFocusListener(new WindowAdapter() {
+			@Override
 			public void windowGainedFocus(WindowEvent e) {
 				prjTable.setModel(new ProjectTableModel(ProjectModel.getAllProjects()));
 			}

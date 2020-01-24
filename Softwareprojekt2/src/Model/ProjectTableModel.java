@@ -15,6 +15,7 @@ public class ProjectTableModel extends AbstractTableModel {
 		columns = new String[] { "Name", "Kunde", "Zweck" };
 	}
 
+	@Override
 	public Object getValueAt(int row, int col) {
 		Projekt prj = projectList.get(row);
 		switch (col) {
@@ -42,6 +43,7 @@ public class ProjectTableModel extends AbstractTableModel {
 		return this.columns.length;
 	}
 
+	@Override
 	public String getColumnName(int col) {
 		return columns[col];
 	}

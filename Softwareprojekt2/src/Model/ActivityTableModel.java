@@ -20,6 +20,7 @@ public class ActivityTableModel extends AbstractTableModel {
 		columns = new String[] { "Name", "Projekt", "Datum", "Zeit in Minuten" };
 	}
 
+	@Override
 	public Object getValueAt(int row, int col) {
 
 		Activity act = activityList.get(row);
@@ -50,6 +51,7 @@ public class ActivityTableModel extends AbstractTableModel {
 		return this.activityList.size();
 	}
 
+	@Override
 	public String getColumnName(int col) {
 		return columns[col];
 	}

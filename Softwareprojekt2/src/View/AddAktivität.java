@@ -41,6 +41,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class AddAktivität extends JFrame implements PropertyChangeListener {
 
@@ -62,7 +63,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 		Icon iconAdd = new ImageIcon("resources/icons8-hinzufügen-24.png");
 
 		setTitle("Aktivität hinzufügen");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 393, 308);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,6 +81,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 				panel.add(btnStoppuhr);
 				
 				btnStoppuhr.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 
 						StoppUhr stoppuhr = new StoppUhr(tfAktDauer);
@@ -95,6 +97,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 
 		//Hinzufügen von Aktivitäten
 		btnAddAktivität.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 
@@ -141,7 +144,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 
 		JLabel lblAktName = new JLabel("Name:");
 		GridBagConstraints gbc_lblAktName = new GridBagConstraints();
-		gbc_lblAktName.anchor = GridBagConstraints.EAST;
+		gbc_lblAktName.anchor = GridBagConstraints.WEST;
 		gbc_lblAktName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAktName.gridx = 0;
 		gbc_lblAktName.gridy = 0;
@@ -159,7 +162,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 
 		JLabel lblAktProjekt = new JLabel("Projekt:");
 		GridBagConstraints gbc_lblAktProjekt = new GridBagConstraints();
-		gbc_lblAktProjekt.anchor = GridBagConstraints.EAST;
+		gbc_lblAktProjekt.anchor = GridBagConstraints.WEST;
 		gbc_lblAktProjekt.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAktProjekt.gridx = 0;
 		gbc_lblAktProjekt.gridy = 1;
@@ -183,7 +186,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 
 		JLabel lblAktDatum = new JLabel("Datum:");
 		GridBagConstraints gbc_lblAktDatum = new GridBagConstraints();
-		gbc_lblAktDatum.anchor = GridBagConstraints.EAST;
+		gbc_lblAktDatum.anchor = GridBagConstraints.WEST;
 		gbc_lblAktDatum.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAktDatum.gridx = 0;
 		gbc_lblAktDatum.gridy = 2;
@@ -218,6 +221,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 
 		//Kalendar öffnen
 		btnDatePicker.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				calendarWindow.setLocation(tfDatum.getLocationOnScreen().x,
 						tfDatum.getLocationOnScreen().y + tfDatum.getHeight());
@@ -228,7 +232,7 @@ public class AddAktivität extends JFrame implements PropertyChangeListener {
 
 		JLabel lblAktDauer = new JLabel("Dauer in Min.:");
 		GridBagConstraints gbc_lblAktDauer = new GridBagConstraints();
-		gbc_lblAktDauer.anchor = GridBagConstraints.EAST;
+		gbc_lblAktDauer.anchor = GridBagConstraints.WEST;
 		gbc_lblAktDauer.insets = new Insets(0, 0, 0, 5);
 		gbc_lblAktDauer.gridx = 0;
 		gbc_lblAktDauer.gridy = 3;

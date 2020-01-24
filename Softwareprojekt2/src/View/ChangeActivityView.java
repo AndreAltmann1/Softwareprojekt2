@@ -36,6 +36,7 @@ import Model.ProjectModel;
 import Model.Projekt;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class ChangeActivityView extends JFrame implements PropertyChangeListener {
 
@@ -56,6 +57,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 	public ChangeActivityView(JTable table) {
 		
 		Icon iconChange = new ImageIcon("resources/icons8-bearbeiten-24.png");
+		Icon iconTimer = new ImageIcon("resources/icons8-timer-24.png");
 
 		//Values der ausgewählten Aktivität
 		String name = (String) table.getValueAt(table.getSelectedRow(), 0);
@@ -64,7 +66,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 		String datum = (String) table.getValueAt(table.getSelectedRow(), 2);
 
 		setTitle("Aktivität bearbeiten");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,6 +80,22 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 		btnChangeAktivität.setVerticalAlignment(SwingConstants.TOP);
 		btnChangeAktivität.setIcon(iconChange);
 		panel.add(btnChangeAktivität);
+		
+		//Stoppuhr öffnen
+//		JButton btnTimer = new JButton("");
+//		btnTimer.setIcon(iconTimer);
+//		btnTimer.setToolTipText("Stoppuhr Starten");
+//		panel.add(btnTimer);
+//		
+//		btnTimer.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//				StoppUhr stoppuhr = new StoppUhr(tfAktDauer);
+//				stoppuhr.setVisible(true);
+//
+//			}
+//		});
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -90,7 +108,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 
 		JLabel lblAktName = new JLabel("Name:");
 		GridBagConstraints gbc_lblAktName = new GridBagConstraints();
-		gbc_lblAktName.anchor = GridBagConstraints.EAST;
+		gbc_lblAktName.anchor = GridBagConstraints.WEST;
 		gbc_lblAktName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAktName.gridx = 0;
 		gbc_lblAktName.gridy = 0;
@@ -108,7 +126,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 
 		JLabel lblAktProjekt = new JLabel("Projekt:");
 		GridBagConstraints gbc_lblAktProjekt = new GridBagConstraints();
-		gbc_lblAktProjekt.anchor = GridBagConstraints.EAST;
+		gbc_lblAktProjekt.anchor = GridBagConstraints.WEST;
 		gbc_lblAktProjekt.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAktProjekt.gridx = 0;
 		gbc_lblAktProjekt.gridy = 1;
@@ -130,7 +148,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 
 		JLabel lblAktDatum = new JLabel("Datum:");
 		GridBagConstraints gbc_lblAktDatum = new GridBagConstraints();
-		gbc_lblAktDatum.anchor = GridBagConstraints.EAST;
+		gbc_lblAktDatum.anchor = GridBagConstraints.WEST;
 		gbc_lblAktDatum.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAktDatum.gridx = 0;
 		gbc_lblAktDatum.gridy = 2;
@@ -159,6 +177,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 		calendarWindow.addPropertyChangeListener(this);
 
 		btnDateChanger.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				calendarWindow.setLocation(tfAktDatum.getLocationOnScreen().x,
 						tfAktDatum.getLocationOnScreen().y + tfAktDatum.getHeight());
@@ -169,7 +188,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 
 		JLabel lblAktDauer = new JLabel("Dauer in Min.:");
 		GridBagConstraints gbc_lblAktDauer = new GridBagConstraints();
-		gbc_lblAktDauer.anchor = GridBagConstraints.EAST;
+		gbc_lblAktDauer.anchor = GridBagConstraints.WEST;
 		gbc_lblAktDauer.insets = new Insets(0, 0, 0, 5);
 		gbc_lblAktDauer.gridx = 0;
 		gbc_lblAktDauer.gridy = 3;
@@ -191,6 +210,7 @@ public class ChangeActivityView extends JFrame implements PropertyChangeListener
 		tfAktDatum.setText(datum);
 //Ändern der AKtivität
 		btnChangeAktivität.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (tfAktName.getText().equals("") | tfAktDatum.equals("") | tfAktDauer.getText().equals("")) {

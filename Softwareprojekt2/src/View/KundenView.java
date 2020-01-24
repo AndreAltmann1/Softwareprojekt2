@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 
@@ -55,7 +56,7 @@ public class KundenView extends JFrame {
 		Icon iconInfo = new ImageIcon("resources/icons8-diagramm-bericht-24.png");
 		
 		setTitle("Kunden");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 626, 453);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,6 +78,7 @@ public class KundenView extends JFrame {
 
 		//Öffnen Des Fensters zum hinzufügen von Kunden
 		btnAddKu.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				;
 				AddKuView addKunden = new AddKuView();
@@ -91,6 +93,7 @@ public class KundenView extends JFrame {
 
 		//Kunden Löschen
 		btnDelKu.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				row = KuTable.getSelectedRow();
 				if (row == -1) {
@@ -142,6 +145,7 @@ public class KundenView extends JFrame {
 		
 		//Öffnen das Fensters zum Ändern von Kunden
 		btnChangeKu.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				row = KuTable.getSelectedRow();
@@ -164,7 +168,6 @@ public class KundenView extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		ctm = new CustomerTableModel(CustomerModel.getAllCustomer());
-
 		KuTable = new JTable(ctm);
 
 		KuTable.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -172,6 +175,7 @@ public class KundenView extends JFrame {
 
 		//Öffnen der Informationen zum ausgewählten kunden
 		btnreload.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				row = KuTable.getSelectedRow();
 				if (row == -1) {
@@ -186,6 +190,7 @@ public class KundenView extends JFrame {
 		});
 //Aktualisieren der Tabelle wenn Fenster Focus gewinnt
 		addWindowFocusListener(new WindowAdapter() {
+			@Override
 			public void windowGainedFocus(WindowEvent e) {
 				KuTable.setModel(new CustomerTableModel(CustomerModel.getAllCustomer()));
 			}

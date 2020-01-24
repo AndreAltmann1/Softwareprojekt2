@@ -1,11 +1,7 @@
 package Model;
 
 import java.io.Serializable;
-import java.lang.Boolean;
 import java.lang.String;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
 
 //Erzeugt Tabelle für Projekte in der Datenbank

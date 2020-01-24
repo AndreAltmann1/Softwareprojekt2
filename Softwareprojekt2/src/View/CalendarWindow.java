@@ -2,8 +2,6 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
@@ -34,7 +32,7 @@ public class CalendarWindow extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setSize(235, 200);
-		setTitle("MindFusion.Scheduling Sample: Minimal Application");
+		setTitle("Calendar");
 
 		changeSupport = new PropertyChangeSupport(this);
 
@@ -46,6 +44,7 @@ public class CalendarWindow extends JFrame {
 
 		//Wenn Datum durch Doppelklick mit der Maus ausgewählt wurde wird dieses als ausgewähltes Datum gesetzt
 		calendar.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
 					// clear the selection
@@ -88,6 +87,7 @@ public class CalendarWindow extends JFrame {
 
 	}
 
+	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		changeSupport.addPropertyChangeListener(listener);
 	}

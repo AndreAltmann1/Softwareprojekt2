@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -17,6 +16,7 @@ public class CustomerTableModel extends AbstractTableModel {
 		columns = new String[] { "Name", "Vorname", "Firma", "Plz", "Ort", "Anschrift", "Telefon" };
 	}
 
+	@Override
 	public Object getValueAt(int row, int col) {
 
 		Customer cust = customerList.get(row);
@@ -52,6 +52,7 @@ public class CustomerTableModel extends AbstractTableModel {
 		return this.columns.length;
 	}
 
+	@Override
 	public String getColumnName(int col) {
 		return columns[col];
 	}

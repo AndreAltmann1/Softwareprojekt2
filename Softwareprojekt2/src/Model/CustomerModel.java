@@ -12,7 +12,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 
 public class CustomerModel {
 
-	private static ArrayList<Customer> customerList = new ArrayList<Customer>();
+	
 //Gibt alle Kunden aus der Datenbank in einer Liste zurück
 	public static List<Customer> getAllCustomer() throws DatabaseException {
 		Query q = DBConnector.getEM().createQuery("select t from TBL_CUSTOMER t");

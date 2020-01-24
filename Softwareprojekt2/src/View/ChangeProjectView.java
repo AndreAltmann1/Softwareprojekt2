@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import Model.Customer;
@@ -50,7 +51,7 @@ public class ChangeProjectView extends JFrame {
 		String zweck = (String) table.getValueAt(table.getSelectedRow(), 2);
 
 		setTitle("Projekt bearbeiten");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -137,6 +138,7 @@ public class ChangeProjectView extends JFrame {
 
 		//Projekt in der Datenbanktabelle ändern
 		btnChangeProjekt.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tfName.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Bitte alle Felder Füllen", "Fehlermeldung",
@@ -152,6 +154,7 @@ public class ChangeProjectView extends JFrame {
 
 			}
 		});
+		pack();
 	}
 
 }

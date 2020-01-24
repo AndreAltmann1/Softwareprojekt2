@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -53,7 +54,22 @@ public class MainView extends JFrame {
 		Icon iconDel = new ImageIcon("resources/icons8-löschen-24.png");
 		Icon iconChange = new ImageIcon("resources/icons8-bearbeiten-24.png");
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		 addWindowListener(new WindowAdapter() {
+		      public void windowClosing(WindowEvent we) {
+		        int result = JOptionPane.showConfirmDialog(null,
+		            "Wollen sie Das Programm wirklich beenden ?", "",
+		            JOptionPane.YES_NO_OPTION);
+		        if (result == JOptionPane.YES_OPTION)
+		          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        else if (result == JOptionPane.NO_OPTION)
+		          setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		      }
+		    });
+		
+		
+		
+		
 		setBounds(100, 100, 569, 451);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -66,6 +82,7 @@ public class MainView extends JFrame {
 		mnProjekte.add(mntmAddPrj);
 //Öffnen der Projektverwaltung
 		mntmAddPrj.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				;
 				ProjektView projekts = new ProjektView();
@@ -80,6 +97,7 @@ public class MainView extends JFrame {
 		mnKunden.add(mntmAddKunde);
 //Öffnen der Kundenverwaltung
 		mntmAddKunde.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				;
 				KundenView kunden = new KundenView();
@@ -101,6 +119,7 @@ public class MainView extends JFrame {
 		panel.add(btnHinzufügen);
 //Öffnen des Fensters zum hinzufügen von Aktivitäten
 		btnHinzufügen.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				;
 				AddAktivität aktivitäten = new AddAktivität();
@@ -115,6 +134,7 @@ public class MainView extends JFrame {
 		panel.add(btnLöschen);
 //Aktivitäten Löschen
 		btnLöschen.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				row = table.getSelectedRow();
 				if (row == -1) {
@@ -148,6 +168,7 @@ public class MainView extends JFrame {
 
 		//Öffnen des Fensters zum ändern einer Aktivität
 		btnÄndern.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				row = table.getSelectedRow();
 				if (row == -1) {
@@ -161,6 +182,7 @@ public class MainView extends JFrame {
 		});
 //Aktualisieren der Tabelle wenn Fenster Fokus gewinnt
 		addWindowFocusListener(new WindowAdapter() {
+			@Override
 			public void windowGainedFocus(WindowEvent e) {
 				table.setModel(new ActivityTableModel(ActivityModel.getAllActivities()));
 			}

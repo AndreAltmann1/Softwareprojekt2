@@ -3,8 +3,6 @@ package Model;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
-import java.util.List;
-
 import javax.persistence.*;
 
 //Erzeugt Tabelle Für Kunden in der Datenbank

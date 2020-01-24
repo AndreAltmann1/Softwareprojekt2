@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 import org.jfree.chart.ChartFactory;
@@ -49,7 +50,7 @@ public class CustomerInfo extends JFrame {
 	public CustomerInfo(JTable custTable) {
 
 		setMinimumSize(new Dimension(1000, 1000));
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 988, 864);
 
 		JPanel panelDiagram = new JPanel();

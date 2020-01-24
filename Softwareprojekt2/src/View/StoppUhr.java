@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -18,12 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.awt.Font;
-import java.awt.Window.Type;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.WindowFocusListener;
-import java.awt.event.WindowEvent;
 
 
 public class StoppUhr extends JFrame {
@@ -41,7 +36,7 @@ public class StoppUhr extends JFrame {
 		setResizable(false);
 
 		setTitle("Stoppuhr");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 384, 249);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -54,6 +49,7 @@ public class StoppUhr extends JFrame {
 
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -98,6 +94,7 @@ public class StoppUhr extends JFrame {
 
 		//Starten des Timers 
 		btnStart.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 //Timer wird erstellt und zählt jede sekunde hoch. Wenn die Sekunden 60 erreichen wird die vsriable für Minuten um 1 erhöht und Sekunden wider auf 0 gesetzt
 				t = new Timer(1000, new ActionListener() {
@@ -125,6 +122,7 @@ public class StoppUhr extends JFrame {
 		});
 //Pausiert das Zählen
 		btnPause.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				t.stop();
 			}
@@ -133,6 +131,7 @@ public class StoppUhr extends JFrame {
 
 //Timer wird angehalten und Zeit wird in das Textfield übergeben. Dabei wird auf volle Minuten gerundet		
 		btnStop.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int min = Integer.parseInt(lblMin.getText());
 				int sec = Integer.parseInt(lblSec.getText());

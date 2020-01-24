@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import Model.Customer;
@@ -53,7 +54,7 @@ public class ChangeCustView extends JFrame {
 		String telefon = (String) table.getValueAt(table.getSelectedRow(), 6);
 
 		setTitle("Kunde bearbeiten");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 591, 454);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -205,6 +206,7 @@ public class ChangeCustView extends JFrame {
 
 		//Ändern des Kunden in der Datenbank Tabelle
 		btnChangeKunde.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tfKuName.getText().equals("") || tfKuVorname.getText().equals("") || tfKuFirma.getText().equals("")
 						|| tfKuPlz.getText().equals("") || tfKuOrt.getText().equals("")
@@ -223,6 +225,8 @@ public class ChangeCustView extends JFrame {
 
 			}
 		});
+		
+		pack();
 	}
 
 }
